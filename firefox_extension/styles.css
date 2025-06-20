@@ -1,0 +1,281 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* CSS Variables for design tokens */
+:root {
+  --color-primary: #3064C7;
+  --color-primary-light: #3369CE;
+  --color-primary-dark: #2349A3;
+  --color-secondary: #EFF5FF;
+  --color-accent: #FF9B42;
+  --color-success: #29D243;
+  --color-danger: #FF4141;
+  --color-warning: #FFCACA;
+  --color-bg: #fbfdff;
+  --color-divider: hsla(217, 73%, 51%, 0.1);
+  --color-text: #414141; /* Improved contrast */
+  --color-muted: #555; /* Improved contrast */
+  --color-shadow: 0 4px 12px rgba(48, 100, 199, 0.3);
+  --color-shadow-footer: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  --border-radius: 4px;
+  --border-radius-lg: 12px;
+  --font-family-base: 'Roboto', sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 2rem;
+  --font-size-sm: 0.9rem;
+  --transition: 0.2s;
+  --box-sizing: border-box;
+}
+
+/* Base styling */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  margin: 0;
+  padding: 24px;
+  width: 400px;
+  max-width: 400px;
+  height: 600px;
+  max-height: 600px;
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+  box-sizing: var(--box-sizing);
+  overflow-x: hidden;
+  color: var(--color-text);
+}
+
+/* Divider styling */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-divider);
+  margin: 0.75rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03rem;
+  color: var(--color-primary); /* Improved contrast for headings */
+}
+
+/* Specific h1 styling */
+h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Container styling */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: var(--box-sizing);
+}
+
+.container h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+.container p {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: var(--font-size-sm);
+  color: #97999b; /* Subtle, but accessible contrast on #fbfdff */
+  text-align: left;
+  width: 100%;
+}
+
+/* Individual container styling */
+/* Center header content horizontally and vertically */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  width: 100%;
+  box-sizing: var(--box-sizing);
+}
+
+/* Main container styling */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: var(--box-sizing);
+}
+
+/* Logo styling */
+.logo {
+  max-width: 44px;
+  height: auto;
+  margin: 0;
+}
+
+/* Logo and title container styling */
+.logo-title-container, .header-title-group {
+  display: flex;
+  align-items: center;
+}
+
+.logo-title-container {
+  gap: 12px;
+}
+
+/* Center title and subtitle horizontally */
+.header-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1em;
+}
+
+/* Title and subtitle styling */
+#main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3064C7;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #97999b;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+/* Segment Content styling */
+.segment-content {
+  width: 100%;
+  padding: 0.5rem 0;
+  box-sizing: var(--box-sizing);
+}
+
+#content {
+  padding-bottom: 76px; /* Add padding to prevent content from being hidden behind fixed footer */
+  width: 100%;
+  box-sizing: var(--box-sizing);
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-bg);
+  padding: 16px 24px;
+  box-sizing: var(--box-sizing);
+  z-index: 1000; /* Ensures footer stays on top of other elements */
+  box-shadow: var(--color-shadow-footer); /* Optional: adds a subtle shadow for visual separation */
+}
+
+/* Additional responsive styles for popup */
+img, password-container, segment-control, advanced-options, .options-container {
+  max-width: 100%;
+  box-sizing: var(--box-sizing);
+}
+
+/* Ensure all content inside the extension respects the width constraints */
+* {
+  box-sizing: var(--box-sizing);
+}
+
+/* Ensure the popup has a consistent width */html {
+  width: 400px;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: scroll;
+}
+
+/* Add focus style for all interactive elements */
+button:focus-visible, [tabindex]:focus-visible, input:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  background: var(--color-secondary, #EFF5FF);
+  border-radius: var(--border-radius, 4px);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(202deg, var(--color-primary-light, #3369CE) 0%, var(--color-primary-dark, #2349A3) 100%);
+  border-radius: var(--border-radius, 4px);
+  border: 2px solid var(--color-secondary, #EFF5FF);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(202deg, #2F61C3 0%, #2349A3 100%);
+}
+::-webkit-scrollbar-corner {
+  background: var(--color-secondary, #EFF5FF);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-light, #3369CE) var(--color-secondary, #EFF5FF);
+}
+
+/* Separator Row Styling */
+.separator-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4px;
+  gap: 0;
+  padding: 0;
+}
+
+#separator-input {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-secondary);
+  border: 1px solid var(--color-primary-light);
+  border-radius: var(--border-radius);
+  padding: 6px 12px;
+  margin-left: 0;
+  width: 60px;
+  min-width: 48px;
+  max-width: 80px;
+  transition: border-color var(--transition);
+  box-sizing: var(--box-sizing);
+  outline: none;
+  height: 32px;
+  text-align: center;
+  margin-right: 0;
+}
+
+#separator-input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+}
+
+#separator-input::placeholder {
+  color: #b0b8c9;
+  opacity: 1;
+}
+/* Attribution: d3bvstack, 2025. */

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Popup</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+
+<body>
+  <header class="main-container" role="banner">
+    <div class="container" id="header">
+      <img src="images/logo.svg" alt="Safepass application logo" class="logo" role="img" aria-label="Safepass application logo">
+      <div class="header-title-group">
+        <h1 id="main-title">Safepass</h1>
+        <p class="subtitle">Your security, simplified.</p>
+      </div>
+    </div>
+  </header>
+  <main class="container" id="content" role="main" aria-labelledby="main-title">
+    <segment-control selected="option1" aria-label="Password or Passphrase selection">
+      <span data-option="option1" tabindex="0">Password</span>
+      <span data-option="option2" tabindex="0">Passphrase</span>
+    </segment-control>
+    <div class="segment-content" id="option1-content"> <password-container
+        placeholder="Click the button to generate a password..." aria-label="Password generator"></password-container>
+      <p>Click password to copy</p>
+      <strength-badge></strength-badge>
+      <div class="divider" role="separator" aria-hidden="true"></div> <advanced-options title="Advanced Options">
+        <div class="options-container"> <styled-checkbox id="custom-length" label="Custom Length"
+            checked></styled-checkbox>
+          <div id="length-slider-container" class="slider-container">
+            <character-slider id="length-slider" min="8" max="255" value="32" label="" aria-label="Password length slider"></character-slider>
+          </div>
+          <styled-checkbox id="uppercase" label="Uppercase Letters" checked></styled-checkbox>
+          <styled-checkbox id="lowercase" label="Lowercase Letters" checked></styled-checkbox>
+          <styled-checkbox id="numbers" label="Numbers" checked></styled-checkbox>
+          <styled-checkbox id="symbols" label="Symbols (#, %, +, etc)"></styled-checkbox> <styled-checkbox
+            id="exclude-ambiguous" label="Exclude Ambiguous (o, 0, O, etc.)"></styled-checkbox> <styled-checkbox
+            id="allo-duplicates" label="Allow Duplicate Characters"></styled-checkbox>
+        </div>
+      </advanced-options>
+    </div>
+    <div class="segment-content" id="option2-content" hidden>
+      <password-container placeholder="Click the button to generate a passphrase..." aria-label="Passphrase generator"></password-container>
+      <p>Click password to copy</p>
+      <strength-badge></strength-badge>
+      <div class="divider" role="separator" aria-hidden="true"></div> <advanced-options title="Advanced Options">
+        <div class="options-container">
+          <styled-checkbox id="custom-words" label="Custom Length" checked></styled-checkbox>
+          <div id="words-slider-container" class="slider-container" hidden>
+            <character-slider id="words-slider" min="4" max="10" value="8" label="" aria-label="Word count slider"></character-slider>
+          </div>
+          <styled-checkbox id="capitalize" label="Capitalize First Letter" checked></styled-checkbox>
+          <styled-checkbox id="common-words" label="Use Common Words Only"></styled-checkbox>
+          <styled-checkbox id="include-number" label="Include Number" checked></styled-checkbox>
+          <styled-checkbox id="include-symbol" label="Include Symbol"></styled-checkbox>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <styled-checkbox id="custom-separator" label="Custom Separator"></styled-checkbox>
+            <input id="separator-input" type="text" maxlength="3" placeholder="e.g. _ or ." style="display:none; width: 60px;" aria-label="Custom separator input">
+          </div>
+        </div>
+      </advanced-options>
+    </div>
+  </main>
+  <footer class="container" id="footer" role="contentinfo">
+    <footer-buttons></footer-buttons>
+  </footer>
+  <script type="module" src="components/segment-control.js"></script>
+  <script type="module" src="components/styled-checkbox.js"></script>
+  <script type="module" src="components/password-container.js"></script>
+  <script type="module" src="components/strength-badge.js"></script>
+  <script type="module" src="components/advanced-options.js"></script>
+  <script type="module" src="components/character-slider.js"></script>
+  <script type="module" src="components/footer-buttons.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
