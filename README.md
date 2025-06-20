@@ -16,16 +16,16 @@ Safepass is a secure, open-source password generator browser extension available
 
 ### Chrome
 
-1. Go to `chrome_extension/` directory.
+1. Download the latest `chrome_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
 2. Open [chrome://extensions](chrome://extensions) in your browser.
-3. Enable "Developer mode".
-4. Click "Load unpacked" and select the `chrome_extension/` folder.
+3. Enable "Developer mode" (top right corner).
+4. Drag and drop the `chrome_extension.zip` file onto the Chrome Extensions page to install.
 
 ### Firefox
 
-1. Go to `firefox_extension/` directory.
-2. Open [about:debugging#/runtime/this-firefox](about:debugging#/runtime/this-firefox) in your browser.
-3. Click "Load Temporary Add-on" and select the `manifest.json` file in the `firefox_extension/` folder.
+1. Download the latest `firefox_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
+2. Open [about:addons](about:addons) or [about:debugging#/runtime/this-firefox](about:debugging#/runtime/this-firefox) in your browser.
+3. Drag and drop the `firefox_extension.zip` file onto the Add-ons or Debugging page to install.
 
 
 #### Enabling Unsigned Add-ons in Firefox
