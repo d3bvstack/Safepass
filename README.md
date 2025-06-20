@@ -78,4 +78,5 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ## License
 
 This project is licensed under the Attribution-NonCommercial 4.0 International License.
+
 [![Safepass](https://github.com/user-attachments/assets/065b62d0-397b-499d-bc0a-de9896ed8b69)](https://github.com/d3bvstack/Safepass)
