@@ -27,6 +27,26 @@ Safepass is a secure, open-source password generator browser extension available
 2. Open [about:debugging#/runtime/this-firefox](about:debugging#/runtime/this-firefox) in your browser.
 3. Click "Load Temporary Add-on" and select the `manifest.json` file in the `firefox_extension/` folder.
 
+
+#### Enabling Unsigned Add-ons in Firefox
+
+By default, Firefox only allows unsigned extensions to be loaded temporarily for development. If you want to enable unsigned add-ons for longer-term use (not just temporary), you need to use Firefox Developer Edition or Nightly, or start Firefox with signature checks disabled:
+
+**Option 1: Use Firefox Developer Edition or Nightly**
+- Download and install [Firefox Developer Edition](https://www.mozilla.org/firefox/developer/) or [Firefox Nightly](https://www.mozilla.org/firefox/nightly/).
+- These versions allow you to load unsigned extensions permanently via `about:debugging` or by setting the `xpinstall.signatures.required` preference to `false` in `about:config`.
+
+**Option 2: Disable Signature Requirement (Advanced)**
+- Start Firefox with the signature check disabled (not recommended for daily use):
+    1. Close Firefox.
+    2. Start Firefox from the terminal with:
+       ```bash
+       firefox --allow-addon-sideload
+       ```
+    3. Or, in Developer/Nightly, go to `about:config` and set `xpinstall.signatures.required` to `false`.
+
+> **Warning:** Disabling signature checks can reduce your browser's security. Only do this for development or testing purposes.
+
 ## Usage
 
 1. Click the Safepass icon in your browser toolbar.
