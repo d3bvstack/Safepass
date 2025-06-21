@@ -35,6 +35,7 @@ By default, Firefox only allows unsigned extensions to be loaded temporarily for
 **Option 1: Use Firefox Developer Edition or Nightly**
 - Download and install [Firefox Developer Edition](https://www.mozilla.org/firefox/developer/) or [Firefox Nightly](https://www.mozilla.org/firefox/nightly/).
 - These versions allow you to load unsigned extensions permanently via `about:debugging` or by setting the `xpinstall.signatures.required` preference to `false` in `about:config`.
+- > **Warning:** Firefox signing is being worked on.
 
 **Option 2: Disable Signature Requirement (Advanced)**
 - Start Firefox with the signature check disabled (not recommended for daily use):
