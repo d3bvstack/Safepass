@@ -30,8 +30,9 @@ Safepass is a secure, open-source password generator browser extension available
 
 #### Enabling Unsigned Add-ons in Firefox
 
-By default, Firefox only allows unsigned extensions to be loaded temporarily for development. If you want to enable unsigned add-ons for longer-term use (not just temporary), you need to use Firefox Developer Edition or Nightly, or start Firefox with signature checks disabled:
 > Firefox signing is being worked on.
+
+By default, Firefox only allows unsigned extensions to be loaded temporarily for development. If you want to enable unsigned add-ons for longer-term use (not just temporary), you need to use Firefox Developer Edition or Nightly, or start Firefox with signature checks disabled:
 
 **Option 1: Use Firefox Developer Edition or Nightly**
 - Download and install [Firefox Developer Edition](https://www.mozilla.org/firefox/developer/) or [Firefox Nightly](https://www.mozilla.org/firefox/nightly/).
