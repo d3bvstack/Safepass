@@ -16,38 +16,27 @@ Safepass is a secure, open-source password generator browser extension available
 
 ### Chrome
 
+**Manual Install**
+
 1. Download the latest `chrome_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
 2. Open [chrome://extensions](chrome://extensions) in your browser.
-3. Enable "Developer mode" (top right corner).
+3. Enable **Developer mode** (top right corner).
 4. Drag and drop the `chrome_extension.zip` file onto the Chrome Extensions page to install.
+
+---
 
 ### Firefox
 
-1. Download the latest `firefox_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
-2. Open [about:addons](about:addons) or [about:debugging#/runtime/this-firefox](about:debugging#/runtime/this-firefox) in your browser.
-3. Drag and drop the `firefox_extension.zip` file onto the Add-ons or Debugging page to install.
+**Automatic Install**  
 
+[![Get it on Firefox Add-ons](https://github.com/user-attachments/assets/0dd140e6-750d-4b1d-a658-95f2df9fc82c)](https://addons.mozilla.org/es-ES/firefox/addon/safepass/)
 
-#### Enabling Unsigned Add-ons in Firefox
+**Manual Installation**
 
-> Firefox signing is being worked on.
-
-By default, Firefox only allows unsigned extensions to be loaded temporarily for development. If you want to enable unsigned add-ons for longer-term use (not just temporary), you need to use Firefox Developer Edition or Nightly, or start Firefox with signature checks disabled:
-
-**Option 1: Use Firefox Developer Edition or Nightly**
-- Download and install [Firefox Developer Edition](https://www.mozilla.org/firefox/developer/) or [Firefox Nightly](https://www.mozilla.org/firefox/nightly/).
-- These versions allow you to load unsigned extensions permanently via `about:debugging` or by setting the `xpinstall.signatures.required` preference to `false` in `about:config`.
-
-**Option 2: Disable Signature Requirement (Advanced)**
-- Start Firefox with the signature check disabled (not recommended for daily use):
-    1. Close Firefox.
-    2. Start Firefox from the terminal with:
-       ```bash
-       firefox --allow-addon-sideload
-       ```
-    3. Or, in Developer/Nightly, go to `about:config` and set `xpinstall.signatures.required` to `false`.
-
-> **Warning:** Disabling signature checks can reduce your browser's security. Only do this for development or testing purposes.
+1. Download the latest `safepass-1.0.xpi` file from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
+2. In Firefox, open the Add-ons and Themes Manager by pressing `Ctrl+Shift+A`.
+3. Click the gear icon (⚙️) in the top right corner and select “Install Add-on From File…”.
+4. Locate and select the downloaded `.xpi` file to install the extension.
 
 ## Usage
 
