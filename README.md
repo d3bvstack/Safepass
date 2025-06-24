@@ -14,15 +14,6 @@ Safepass is a secure, open-source password generator browser extension available
 
 ## Installation
 
-### Chrome
-
-**Manual Install**
-
-1. Download the latest `chrome_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
-2. Open [chrome://extensions](chrome://extensions) in your browser.
-3. Enable **Developer mode** (top right corner).
-4. Drag and drop the `chrome_extension.zip` file onto the Chrome Extensions page to install.
-
 ### Firefox
 
 **Automatic Install**  
@@ -35,6 +26,15 @@ Safepass is a secure, open-source password generator browser extension available
 2. In Firefox, open the Add-ons and Themes Manager by pressing `Ctrl+Shift+A`.
 3. Click the gear icon (⚙️) in the top right corner and select “Install Add-on From File…”.
 4. Locate and select the downloaded `.xpi` file to install the extension.
+
+### Chrome
+
+**Manual Install**
+
+1. Download the latest `chrome_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
+2. Open [chrome://extensions](chrome://extensions) in your browser.
+3. Enable **Developer mode** (top right corner).
+4. Drag and drop the `chrome_extension.zip` file onto the Chrome Extensions page to install.
 
 ## Usage
 
