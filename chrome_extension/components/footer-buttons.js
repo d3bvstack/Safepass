@@ -50,6 +50,16 @@ class FooterButtons extends HTMLElement {
         .copy-button-container:hover {
           background: linear-gradient(202deg, #2F61C3 0%, #2349A3 100%);
         }
+        .copy-button.animate,
+        .autofill-button.animate {
+          animation: button-bounce 0.22s cubic-bezier(.4,0,.2,1);
+        }
+        @keyframes button-bounce {
+          0% { transform: scale(1); }
+          40% { transform: scale(1.06); }
+          70% { transform: scale(0.98); }
+          100% { transform: scale(1); }
+        }
         .button {
           flex: 1 1 0;
           height: 44px;
@@ -94,11 +104,25 @@ class FooterButtons extends HTMLElement {
 
   _setupEventListeners() {
     // Use optional chaining for safety
-    this.shadowRoot.querySelector(".autofill-button")?.addEventListener("click", () => {
-      this.dispatchEvent(new CustomEvent("autofill-clicked", { bubbles: true, composed: true }));
-    });
-    this.shadowRoot.querySelector(".copy-button")?.addEventListener("click", () => {
-      this.dispatchEvent(new CustomEvent("copy-clicked", { bubbles: true, composed: true }));    });  }
+    const autofillBtn = this.shadowRoot.querySelector(".autofill-button");
+    if (autofillBtn) {
+      autofillBtn.addEventListener("click", () => {
+        autofillBtn.classList.remove("animate");
+        void autofillBtn.offsetWidth;
+        autofillBtn.classList.add("animate");
+        this.dispatchEvent(new CustomEvent("autofill-clicked", { bubbles: true, composed: true }));
+      });
+    }
+    const copyBtn = this.shadowRoot.querySelector(".copy-button");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        copyBtn.classList.remove("animate");
+        void copyBtn.offsetWidth;
+        copyBtn.classList.add("animate");
+        this.dispatchEvent(new CustomEvent("copy-clicked", { bubbles: true, composed: true }));
+      });
+    }
+  }
 }
 
 // Register the custom element

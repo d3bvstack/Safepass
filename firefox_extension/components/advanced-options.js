@@ -37,7 +37,6 @@ class AdvancedOptions extends HTMLElement {
           overflow: hidden;
         }
         .advanced-options-container {
-          margin-top: 12px;
           width: 100%;
           max-width: 100%;
           box-sizing: var(--box-sizing, border-box);
