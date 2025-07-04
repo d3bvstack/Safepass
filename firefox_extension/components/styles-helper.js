@@ -138,7 +138,7 @@ const getSharedStyles = () => {
     width: 100%;
     height: 1px;
     background-color: var(--color-divider, hsla(217, 73%, 51%, 0.1));
-    margin: 0.75rem 0;
+    margin: 1.5rem 0rem 0.75rem;
   }
   `;
 };
