@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Cross-Browser Extension",
-  "version": "1.0",
-  "description": "A browser extension that works on both Chrome and Firefox.",
+  "name": "Safepass",
+  "version": "1.1",
+  "description": "A secure and easy to use password generator",
   "permissions": [
     "storage",
     "activeTab"
