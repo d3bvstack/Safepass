@@ -34,7 +34,7 @@
 
 .label {
   font-size: var(--font-size-sm, 0.9rem);
-  color: #222; /* Improved contrast */
+  color: #313131; /* Improved contrast */
   text-align: left;
   transition: var(--transition, 0.2s);
   position: relative;
