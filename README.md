@@ -23,7 +23,7 @@ Safepass is a secure, open-source password generator browser extension available
 
 **Manual Installation**
 
-1. Download the latest `safepass-1.0.xpi` file from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
+1. Download the latest `safepass-1.1.xpi` file from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
 2. In Firefox, open the Add-ons and Themes Manager by pressing `Ctrl+Shift+A`.
 3. Click the gear icon (⚙️) in the top right corner and select “Install Add-on From File…”.
 4. Locate and select the downloaded `.xpi` file to install the extension.
