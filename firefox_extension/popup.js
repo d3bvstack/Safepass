@@ -78,7 +78,6 @@ function generatePassword() {
   const includeNumbers = document.getElementById("numbers").checked;
   const includeSpecial = document.getElementById("symbols").checked;
   const excludeSimilar = document.getElementById("exclude-ambiguous").checked;
-  const allowDuplicates = document.getElementById("allo-duplicates").checked;
 
   // Determine password length
   const length = customLengthCheckbox.checked ? parseInt(lengthSlider.value) : 32;
@@ -93,7 +92,6 @@ function generatePassword() {
     requireAll: true,
     excludeSimilar,
     excludeAmbiguous: excludeSimilar,
-    allowDuplicates
   });
 
   // Update password container with new password
@@ -352,8 +350,7 @@ function setupEventListeners() {
     document.getElementById("lowercase"),
     document.getElementById("numbers"),
     document.getElementById("symbols"),
-    document.getElementById("exclude-ambiguous"),
-    document.getElementById("allo-duplicates")
+    document.getElementById("exclude-ambiguous")
   ];
   passwordCheckboxes.forEach(checkbox => {
     if (checkbox) {
