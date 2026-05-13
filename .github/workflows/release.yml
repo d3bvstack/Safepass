@@ -64,11 +64,11 @@ jobs:
           fi
 
           cd build/chrome_extension
-          zip -r "../release-artifacts/safepass-chrome-${IDENT}.zip" .
+          zip -r "${GITHUB_WORKSPACE}/release-artifacts/safepass-chrome-${IDENT}.zip" .
           cd ..
 
           cd firefox_extension
-          zip -r "../release-artifacts/safepass-firefox-${IDENT}.xpi" .
+          zip -r "${GITHUB_WORKSPACE}/release-artifacts/safepass-firefox-${IDENT}.xpi" .
           cd ../..
 
           sha256sum release-artifacts/* > release-artifacts/checksums.txt
