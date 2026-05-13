@@ -3,7 +3,9 @@ name: Build And Release Extensions
 on:
   push:
     branches:
-      - main
+      - master
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -24,33 +26,70 @@ jobs:
       - name: Sync extension targets from source-of-truth
         run: ./scripts/sync-extensions.sh
 
+      - name: Determine if release is needed
+        id: check_version
+        run: |
+          set -euo pipefail
+          MANIFEST_VERSION=$(jq -r .version build/chrome_extension/manifest.json)
+          echo "Manifest version: ${MANIFEST_VERSION}"
+
+          LATEST_TAG=$(git tag --list 'v*' --sort=-v:refname | head -n1 || true)
+          if [ -z "${LATEST_TAG}" ]; then
+            echo "No existing v* tags found — will release"
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          LATEST_VERSION=${LATEST_TAG#v}
+          echo "Latest tag: ${LATEST_TAG} -> ${LATEST_VERSION}"
+
+          HIGHEST=$(printf '%s\n%s\n' "${MANIFEST_VERSION}" "${LATEST_VERSION}" | sort -V | tail -n1)
+          if [ "${HIGHEST}" = "${MANIFEST_VERSION}" ] && [ "${MANIFEST_VERSION}" != "${LATEST_VERSION}" ]; then
+            echo "Manifest is newer than latest tag — will release"
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Manifest is not newer than latest tag — skipping release"
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build release artifacts
         run: |
           set -euo pipefail
           mkdir -p release-artifacts
 
-          SHORT_SHA="${GITHUB_SHA::7}"
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            IDENT="${GITHUB_REF#refs/tags/}"
+          else
+            IDENT="${GITHUB_SHA::7}"
+          fi
 
           cd build/chrome_extension
-          zip -r "../release-artifacts/safepass-chrome-${SHORT_SHA}.zip" .
+          zip -r "../release-artifacts/safepass-chrome-${IDENT}.zip" .
           cd ..
 
           cd firefox_extension
-          zip -r "../release-artifacts/safepass-firefox-${SHORT_SHA}.xpi" .
+          zip -r "../release-artifacts/safepass-firefox-${IDENT}.xpi" .
           cd ../..
 
           sha256sum release-artifacts/* > release-artifacts/checksums.txt
 
       - name: Set release metadata
+        if: ${{ steps.check_version.outputs.should_release == 'true' }}
         id: meta
         run: |
           SHORT_SHA="${GITHUB_SHA::7}"
-          TAG="main-${GITHUB_RUN_NUMBER}-${SHORT_SHA}"
-          TITLE="Safepass main build #${GITHUB_RUN_NUMBER} (${SHORT_SHA})"
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+            TITLE="Safepass ${TAG}"
+          else
+            TAG="master-${GITHUB_RUN_NUMBER}-${SHORT_SHA}"
+            TITLE="Safepass master build #${GITHUB_RUN_NUMBER} (${SHORT_SHA})"
+          fi
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
           echo "title=${TITLE}" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub release
+        if: ${{ steps.check_version.outputs.should_release == 'true' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.meta.outputs.tag }}
