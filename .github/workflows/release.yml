@@ -30,6 +30,12 @@ jobs:
         id: check_version
         run: |
           set -euo pipefail
+          # If this run is triggered by a tag push, always release
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "Triggered by tag ${GITHUB_REF#refs/tags/} — will release"
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           MANIFEST_VERSION=$(jq -r .version build/chrome_extension/manifest.json)
           echo "Manifest version: ${MANIFEST_VERSION}"
 
