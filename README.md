@@ -23,7 +23,7 @@ Safepass is a secure, open-source password generator browser extension available
 
 **Manual Installation**
 
-1. Download the latest `safepass-1.1.xpi` file from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
+1. Download the latest Firefox artifact (`safepass-firefox-<sha>.xpi`) from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
 2. In Firefox, open the Add-ons and Themes Manager by pressing `Ctrl+Shift+A`.
 3. Click the gear icon (⚙️) in the top right corner and select “Install Add-on From File…”.
 4. Locate and select the downloaded `.xpi` file to install the extension.
@@ -32,7 +32,7 @@ Safepass is a secure, open-source password generator browser extension available
 
 **Manual Install**
 
-1. Download the latest `chrome_extension.zip` from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
+1. Download the latest Chrome artifact (`safepass-chrome-<sha>.zip`) from the [Releases](https://github.com/d3bvstack/Safepass/releases) page.
 2. Open [chrome://extensions](chrome://extensions) in your browser.
 3. Enable **Developer mode** (top right corner).
 4. Drag and drop the `chrome_extension.zip` file onto the Chrome Extensions page to install.
@@ -58,8 +58,42 @@ Safepass can help you autofill passwords into login forms:
 
 ## Development
 
-- All extension source code is in the `chrome_extension/` and `firefox_extension/` folders.
-- Shared components and services are organized for easy maintenance.
+Safepass now uses one shared source of truth for Chrome and Firefox, with only browser-exclusive files kept separate.
+
+### Source Layout
+
+- `shared_extension/`: Common source used by both browsers
+- `browser_specific/chrome/`: Chrome-exclusive files
+- `browser_specific/firefox/`: Firefox-exclusive files
+- `build/chrome_extension/`: Generated Chrome target folder (sync output)
+- `build/firefox_extension/`: Generated Firefox target folder (sync output)
+
+### Browser-Exclusive Files
+
+Only these files are intentionally different between browsers:
+
+- `browser_specific/chrome/manifest.json`
+- `browser_specific/firefox/manifest.json`
+- `browser_specific/chrome/components/footer-buttons.js`
+- `browser_specific/firefox/components/footer-buttons.js`
+
+### Sync Workflow
+
+1. Edit common code in `shared_extension/`.
+2. Edit browser-only files in `browser_specific/chrome/` or `browser_specific/firefox/`.
+3. Regenerate target extension folders:
+
+```bash
+./scripts/sync-extensions.sh
+```
+
+4. Verify there is no drift:
+
+```bash
+./scripts/sync-extensions.sh --check
+```
+
+Do not edit generated files directly in `build/chrome_extension/` or `build/firefox_extension/`; those folders are materialized by the sync script.
 
 ## Contributing
 
