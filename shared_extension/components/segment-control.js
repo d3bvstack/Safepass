@@ -1,5 +1,6 @@
 // Custom element for segment control
 import getSharedStyles from './styles-loader.js';
+import { escapeHtml } from '../services/html-sanitizer.js';
 
 class SegmentControl extends HTMLElement {
   #options = [];
@@ -125,7 +126,7 @@ class SegmentControl extends HTMLElement {
                   aria-checked="${option.value === this.#selectedOption}"
                   id="${groupId}-option-${index}"
                   tabindex="${option.value === this.#selectedOption ? "0" : "-1"}">
-            ${option.label}
+            ${escapeHtml(option.label)}
           </button>
         `
           )

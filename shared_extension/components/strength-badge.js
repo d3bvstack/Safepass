@@ -1,5 +1,6 @@
 // StrengthBadge custom element: displays a badge for password/passphrase strength
 import getSharedStyles from './styles-loader.js';
+import { escapeHtml } from '../services/html-sanitizer.js';
 
 /**
  * @element strength-badge
@@ -172,7 +173,7 @@ class StrengthBadge extends HTMLElement {
           </div>
           <div class="strength-row">
             <div class="strength-badge">${text}</div>
-            <div class="strength-tooltip">${conciseFeedback}</div>
+            <div class="strength-tooltip"></div>
           </div>
         </div>
       `;
@@ -181,7 +182,11 @@ class StrengthBadge extends HTMLElement {
     // Get references to the elements we'll update
     const strengthFill = this.shadowRoot.querySelector('.strength-fill');
     const strengthBadge = this.shadowRoot.querySelector('.strength-badge');
-    const strengthTooltip = this.shadowRoot.querySelector('.strength-tooltip');    
+    const strengthTooltip = this.shadowRoot.querySelector('.strength-tooltip');
+    // Set feedback text safely using textContent (prevents XSS)
+    if (strengthTooltip) {
+      strengthTooltip.textContent = conciseFeedback;
+    }    
     // Update based on current strength
     const getWidthFromStrength = (str) => {
       switch(str) {

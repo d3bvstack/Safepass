@@ -2,6 +2,7 @@
  * Custom element for password container component
  */
 import getSharedStyles from './styles-loader.js';
+import { escapeHtmlAttribute } from '../services/html-sanitizer.js';
 
 class PasswordContainer extends HTMLElement {
   /** @type {string} */
@@ -197,7 +198,7 @@ class PasswordContainer extends HTMLElement {
         }
       </style>      <div class="password-container">
         <div class="output-container">
-          <input type="text" class="input-field" placeholder="${placeholder}" readonly>
+          <input type="text" class="input-field" placeholder="${escapeHtmlAttribute(placeholder)}" readonly>
           <div class="copy-overlay">
             <span class="copy-message">Copied!</span>
           </div>

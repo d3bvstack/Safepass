@@ -63,6 +63,10 @@ jobs:
           set -euo pipefail
           mkdir -p release-artifacts
 
+          FIREFOX_VERSION=$(jq -r .version build/firefox_extension/manifest.json)
+          CHROME_VERSION=$(jq -r .version build/chrome_extension/manifest.json)
+          echo "Building Chrome v${CHROME_VERSION} and Firefox v${FIREFOX_VERSION} artifacts"
+
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             IDENT="${GITHUB_REF#refs/tags/}"
           else
@@ -70,11 +74,19 @@ jobs:
           fi
 
           cd build/chrome_extension
-          zip -r "${GITHUB_WORKSPACE}/release-artifacts/safepass-chrome-${IDENT}.zip" .
+          zip -r "${GITHUB_WORKSPACE}/release-artifacts/safepass-chrome-v${CHROME_VERSION}-${IDENT}.zip" .
           cd ..
 
           cd firefox_extension
-          zip -r "${GITHUB_WORKSPACE}/release-artifacts/safepass-firefox-${IDENT}.xpi" .
+          FIREFOX_XPI="${GITHUB_WORKSPACE}/release-artifacts/safepass-firefox-v${FIREFOX_VERSION}-${IDENT}.xpi"
+          zip -r "${FIREFOX_XPI}" .
+
+          # Validate the packaged manifest version so AMO uploads cannot silently use stale payloads.
+          PACKAGED_FIREFOX_VERSION=$(unzip -p "${FIREFOX_XPI}" manifest.json | jq -r .version)
+          if [[ "${PACKAGED_FIREFOX_VERSION}" != "${FIREFOX_VERSION}" ]]; then
+            echo "Packaged Firefox manifest version mismatch: expected ${FIREFOX_VERSION}, got ${PACKAGED_FIREFOX_VERSION}" >&2
+            exit 1
+          fi
           cd ../..
 
           sha256sum release-artifacts/* > release-artifacts/checksums.txt

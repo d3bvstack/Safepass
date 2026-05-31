@@ -1,5 +1,6 @@
 // Custom element for styled checkbox component
 import getSharedStyles from './styles-loader.js';
+import { escapeHtml } from '../services/html-sanitizer.js';
 
 class StyledCheckbox extends HTMLElement {
   constructor() {
@@ -176,9 +177,15 @@ class StyledCheckbox extends HTMLElement {
             </svg>
           </div>
         </div>
-        <label class="checkbox-label" for="${this._id}" id="${this._id}-label">${label}</label>
+        <label class="checkbox-label" for="${this._id}" id="${this._id}-label"></label>
       </div>
     `;
+    // Set label text safely using textContent (prevents XSS)
+    const labelElement = this.shadowRoot.querySelector('.checkbox-label');
+    if (labelElement) {
+      labelElement.textContent = label;
+    }
+
   }
 
   _setupEventListeners() {

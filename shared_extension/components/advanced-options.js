@@ -1,5 +1,6 @@
 // Custom element for advanced options dropdown component
 import getSharedStyles from './styles-loader.js';
+import { escapeHtml } from '../services/html-sanitizer.js';
 
 class AdvancedOptions extends HTMLElement {
   constructor() {
@@ -138,7 +139,7 @@ class AdvancedOptions extends HTMLElement {
       </style>
       <div class="advanced-options-container">
         <div class="advanced-options-header" id="header" role="button" aria-expanded="${this.isOpen}" aria-controls="advanced-options-content" tabindex="0">
-          <span class="advanced-options-title" id="advanced-options-title">${title}</span>
+          <span class="advanced-options-title" id="advanced-options-title"></span>
           <span class="advanced-options-icon" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-icon">
               <path d="M8 10.5L3 5.5L4 4.5L8 8.5L12 4.5L13 5.5L8 10.5Z" fill="var(--color-primary, #3064C7)"/>
@@ -152,6 +153,12 @@ class AdvancedOptions extends HTMLElement {
         </div>
       </div>
     `;
+    // Set title text safely using textContent (prevents XSS)
+    const titleElement = this.shadowRoot.querySelector('.advanced-options-title');
+    if (titleElement) {
+      titleElement.textContent = title;
+    }
+    this._setupEventListeners();
   }
 
   _setupEventListeners() {
